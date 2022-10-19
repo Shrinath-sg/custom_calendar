@@ -1,8 +1,21 @@
 import 'package:flutter/material.dart';
 
-class HomeScreen extends StatelessWidget {
-  HomeScreen({Key? key}) : super(key: key);
-  Color lightblue = const Color(0xffeef9ff);
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({Key? key}) : super(key: key);
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  // Color lightblue = const Color(0xffeef9ff);
+  late DateTime initialDate;
+  @override
+  void initState() {
+    initialDate = DateTime.now();
+    super.initState();
+  }
+
   List<CustomNames> names = [
     CustomNames(id: 0, name: 'Never ends', isClecked: false),
     CustomNames(id: 1, name: '15 days later', isClecked: false),
@@ -25,8 +38,8 @@ class HomeScreen extends StatelessWidget {
           onPressed: () async {
             await showDatePicker(
                 context: context,
-                firstDate: DateTime.now(),
-                lastDate: DateTime.now(),
+                firstDate: DateTime(2015, 8),
+                lastDate: DateTime(2050, 9),
                 customHeaderWidget: GridView.builder(
                     // primary: ,
                     shrinkWrap: true,
@@ -41,14 +54,14 @@ class HomeScreen extends StatelessWidget {
                     itemBuilder: (context, index) {
                       return myButton(context, names[index]);
                     }),
-                initialDate: DateTime.now());
+                initialDate: initialDate);
           },
         )));
   }
 
   myButton(BuildContext context, CustomNames name) {
     return StatefulBuilder(
-      builder: (context, setState) {
+      builder: (context, setState2) {
         return TextButton(
           style: ButtonStyle(
               elevation: MaterialStateProperty.all(0),
